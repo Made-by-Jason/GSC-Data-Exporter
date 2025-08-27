@@ -26,25 +26,66 @@
   </style>
 </head>
 <body class="custom-bg min-h-screen flex flex-col">
-  <!-- Navigation (unchanged) -->
+  <!-- Navigation -->
   <header class="bg-white shadow sticky top-0 z-20">
-    <!-- ... Existing nav code ... -->
+    <nav class="container mx-auto px-4 lg:px-6 py-3 flex justify-between items-center">
+        <a href="#home" class="text-xl font-bold text-blue-800">GSC Exporter</a>
+        <div class="hidden lg:flex gap-8">
+            <a href="#features" class="text-gray-600 hover:text-blue-600">Features</a>
+            <a href="#how" class="text-gray-600 hover:text-blue-600">How It Works</a>
+            <a href="#export" class="text-gray-600 hover:text-blue-600">Export</a>
+            <a href="#seo-checker" class="text-gray-600 hover:text-blue-600">SEO Checker</a>
+            <a href="#faq" class="text-gray-600 hover:text-blue-600">FAQ</a>
+        </div>
+        <button id="menu-toggle" class="lg:hidden">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+    </nav>
+    <div id="mobile-menu" class="hidden lg:hidden px-4 pt-2 pb-4 space-y-2">
+        <a href="#features" class="block text-gray-600 hover:text-blue-600">Features</a>
+        <a href="#how" class="block text-gray-600 hover:text-blue-600">How It Works</a>
+        <a href="#export" class="block text-gray-600 hover:text-blue-600">Export</a>
+        <a href="#seo-checker" class="block text-gray-600 hover:text-blue-600">SEO Checker</a>
+        <a href="#faq" class="block text-gray-600 hover:text-blue-600">FAQ</a>
+    </div>
   </header>
 
   <main class="flex-1">
-    <!-- Home Section (unchanged) -->
-    <section id="home" class="container mx-auto px-4 py-14 fade-in">
-      <!-- ... Existing home code ... -->
+    <!-- Home Section -->
+    <section id="home" class="container mx-auto px-4 py-14 fade-in text-center">
+        <h1 class="text-4xl font-bold text-blue-900 mb-4">The Best Way to Export Google Search Console Data</h1>
+        <p class="text-lg text-gray-600 mb-8">No more limits, no more manual work. Get all your GSC data, automated and secure.</p>
+        <a href="#export" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:bg-blue-700 transition">Start Exporting Now</a>
     </section>
 
-    <!-- Features Section (unchanged) -->
+    <!-- Features Section -->
     <section id="features" class="container mx-auto px-4 py-14 hidden fade-in">
-      <!-- ... Existing features code ... -->
+        <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">Features</h2>
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-semibold text-xl mb-2">Unlimited Exports</h3>
+                <p>Export all your data without the 1,000-row limitation of the GSC interface.</p>
+            </div>
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-semibold text-xl mb-2">Secure & Private</h3>
+                <p>All data processing happens in your browser. Your data never touches our servers.</p>
+            </div>
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-semibold text-xl mb-2">Multiple Formats</h3>
+                <p>Download your data as CSV or Excel (.xlsx) for easy analysis.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- How It Works Section (unchanged) -->
+    <!-- How It Works Section -->
     <section id="how" class="container mx-auto px-4 py-14 hidden fade-in">
-      <!-- ... Existing how code ... -->
+        <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">How It Works</h2>
+        <div class="space-y-4 max-w-2xl mx-auto">
+            <p>1. Sign in with your Google Account.</p>
+            <p>2. Select the property you want to export data from.</p>
+            <p>3. Choose your desired date range and dimensions.</p>
+            <p>4. Click "Export Data" and get your file instantly.</p>
+        </div>
     </section>
 
     <!-- Export Section (Enhanced Form) -->
@@ -55,7 +96,7 @@
           <div>
             <label class="block font-semibold mb-2 text-gray-700">1. Sign In</label>
             <button id="signInBtn" type="button" class="gsc-btn bg-blue-600 text-white px-5 py-2 rounded shadow hover:bg-blue-700 transition flex gap-2 items-center w-full justify-center">
-              <svg class="h-5 w-5" viewBox="0 0 48 48"><!-- Google Logo SVG --></svg>
+              <svg class="h-5 w-5" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.38 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"></path><path fill="#34A853" d="M24 46c5.94 0 10.92-1.96 14.56-5.3l-7.11-5.52c-1.96 1.32-4.47 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.38v5.7C7.86 40.1 15.37 46 24 46z"></path><path fill="#FBBC05" d="M11.69 28.18c-.44-1.32-.69-2.73-.69-4.18s.25-2.86.69-4.18v-5.7H4.38C2.69 17.84 2 20.82 2 24s.69 6.16 2.38 9.02l7.31-5.84z"></path><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.26 29.94 2 24 2 15.37 2 7.86 7.9 4.38 15.1l7.31 5.7c1.73-5.2 6.58-9.05 12.31-9.05z"></path></svg>
               Sign in with Google
             </button>
             <p id="authStatus" class="text-xs text-gray-500 mt-1"></p>
@@ -77,10 +118,10 @@
           <div>
             <label class="block font-semibold mb-2 text-gray-700">3. Select Dimensions</label>
             <div class="flex flex-wrap gap-2">
-              <label class="flex items-center gap-1"><input type="checkbox" value="query" checked disabled> Query</label>
-              <label class="flex items-center gap-1"><input type="checkbox" value="page" disabled> Page</label>
-              <label class="flex items-center gap-1"><input type="checkbox" value="country" disabled> Country</label>
-              <label class="flex items-center gap-1"><input type="checkbox" value="device" disabled> Device</label>
+              <label class="flex items-center gap-1"><input type="checkbox" value="query" checked > Query</label>
+              <label class="flex items-center gap-1"><input type="checkbox" value="page" > Page</label>
+              <label class="flex items-center gap-1"><input type="checkbox" value="country" > Country</label>
+              <label class="flex items-center gap-1"><input type="checkbox" value="device" > Device</label>
             </div>
           </div>
           <div>
@@ -92,7 +133,7 @@
           </div>
           <div>
             <button id="exportBtn" type="button" class="gsc-btn bg-green-600 text-white px-6 py-3 rounded-lg font-semibold shadow w-full hover:bg-green-700 transition flex items-center justify-center gap-2" disabled>
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M14.707 7.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
               Export Data
             </button>
           </div>
@@ -107,168 +148,52 @@
       </div>
     </section>
 
-    <!-- FAQ Section (unchanged) -->
+    <!-- SEO Checker Section -->
+    <section id="seo-checker" class="container mx-auto px-4 py-14 hidden fade-in">
+        <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center">On-Page SEO Checker</h2>
+        <div class="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 card">
+            <div class="space-y-4">
+                <div>
+                    <label for="urlInput" class="block font-semibold mb-2 text-gray-700">Enter URL to Analyze</label>
+                    <input type="url" id="urlInput" placeholder="https://example.com" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-400">
+                </div>
+                <button id="analyzeBtn" class="gsc-btn bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold shadow w-full hover:bg-blue-700 transition">Analyze</button>
+            </div>
+            <div id="seoResults" class="mt-6 hidden">
+                <h3 class="text-lg font-semibold mb-4">Analysis Results</h3>
+                <div id="resultsContainer" class="space-y-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
     <section id="faq" class="container mx-auto px-4 py-14 hidden fade-in">
-      <!-- ... Existing FAQ code ... -->
+        <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="max-w-2xl mx-auto space-y-4">
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="faq-question font-semibold cursor-pointer">Is this tool secure?</h3>
+                <p class="hidden mt-2 text-gray-600">Yes. This tool runs entirely in your web browser. Your Google Search Console data is never sent to any server, ensuring your data remains private and secure.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="faq-question font-semibold cursor-pointer">What are the export limits?</h3>
+                <p class="hidden mt-2 text-gray-600">The Google Search Console API allows for up to 25,000 rows per request. This tool uses that limit, which is much higher than the 1,000-row limit in the GSC web interface.</p>
+            </div>
+        </div>
     </section>
   </main>
 
-  <!-- Footer (unchanged) -->
+  <!-- Footer -->
   <footer class="bg-white border-t shadow-inner py-6 mt-12">
-    <!-- ... Existing footer code ... -->
+    <div class="container mx-auto text-center text-gray-600">
+        <p>&copy; 2024 GSC Data Exporter. All rights reserved.</p>
+    </div>
   </footer>
 
-  <script>
-    // Constants
-    const CLIENT_ID = 'YOUR_CLIENT_ID.apps.googleusercontent.com'; // Replace with your OAuth Client ID
-    const DISCOVERY_DOC = 'https://searchconsole.googleapis.com/$discovery/rest?version=v1';
-    const SCOPES = 'https://www.googleapis.com/auth/webmasters.readonly';
-
-    // GAPI Load
-    window.onGapiLoad = function() {
-      gapi.load('client:auth2', initClient);
-    };
-
-    function initClient() {
-      gapi.client.init({
-        clientId: CLIENT_ID,
-        discoveryDocs: [DISCOVERY_DOC],
-        scope: SCOPES
-      }).then(() => {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-        document.getElementById('signInBtn').onclick = () => gapi.auth2.getAuthInstance().signIn();
-      }, (error) => {
-        alert('Error initializing Google API: ' + JSON.stringify(error));
-      });
-    }
-
-    function updateSigninStatus(isSignedIn) {
-      const authStatus = document.getElementById('authStatus');
-      const siteSelect = document.getElementById('siteSelect');
-      const inputs = document.querySelectorAll('#gscExportForm input, #gscExportForm select, #exportBtn');
-      if (isSignedIn) {
-        authStatus.textContent = 'Authenticated successfully.';
-        document.getElementById('signInBtn').textContent = 'Sign Out';
-        document.getElementById('signInBtn').onclick = () => gapi.auth2.getAuthInstance().signOut();
-        inputs.forEach(el => el.disabled = false);
-        loadSites();
-      } else {
-        authStatus.textContent = '';
-        document.getElementById('signInBtn').textContent = 'Sign in with Google';
-        document.getElementById('signInBtn').onclick = () => gapi.auth2.getAuthInstance().signIn();
-        inputs.forEach(el => el.disabled = true);
-        siteSelect.innerHTML = '';
-      }
-    }
-
-    function loadSites() {
-      gapi.client.searchconsole.sites.list().then(response => {
-        const siteSelect = document.getElementById('siteSelect');
-        siteSelect.innerHTML = '';
-        response.result.siteEntry.forEach(site => {
-          const option = document.createElement('option');
-          option.value = site.siteUrl;
-          option.textContent = site.siteUrl;
-          siteSelect.appendChild(option);
-        });
-      }).catch(err => alert('Error loading sites: ' + err.result.error.message));
-    }
-
-    document.getElementById('exportBtn').onclick = function() {
-      const siteUrl = document.getElementById('siteSelect').value;
-      const startDate = document.getElementById('startDate').value;
-      const endDate = document.getElementById('endDate').value;
-      const dimensions = Array.from(document.querySelectorAll('#gscExportForm input[type="checkbox"]:checked')).map(cb => cb.value);
-      const format = document.getElementById('exportFormat').value;
-
-      if (!siteUrl || !startDate || !endDate) {
-        alert('Please select site and dates.');
-        return;
-      }
-
-      gapi.client.searchconsole.searchanalytics.query({
-        siteUrl: siteUrl,
-        resource: {
-          startDate: startDate,
-          endDate: endDate,
-          dimensions: dimensions,
-          rowLimit: 25000 // Max per call; paginate if needed
-        }
-      }).then(response => {
-        const rows = response.result.rows || [];
-        const headers = ['Clicks', 'Impressions', 'CTR', 'Position', ...dimensions];
-        const data = rows.map(row => [row.clicks, row.impressions, row.ctr, row.position, ...row.keys]);
-
-        // Preview
-        previewData(headers, data);
-
-        // Export
-        if (format === 'csv') exportCSV(headers, data);
-        else exportXLSX(headers, data);
-      }).catch(err => alert('Error querying data: ' + err.result.error.message));
-    };
-
-    function previewData(headers, data) {
-      const table = document.getElementById('previewTable');
-      table.innerHTML = '';
-      const thead = document.createElement('thead');
-      const tr = document.createElement('tr');
-      headers.forEach(h => {
-        const th = document.createElement('th');
-        th.textContent = h;
-        tr.appendChild(th);
-      });
-      thead.appendChild(tr);
-      table.appendChild(thead);
-
-      const tbody = document.createElement('tbody');
-      data.forEach(row => {
-        const tr = document.createElement('tr');
-        row.forEach(cell => {
-          const td = document.createElement('td');
-          td.textContent = cell;
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      });
-      table.appendChild(tbody);
-
-      document.getElementById('previewSection').classList.remove('hidden');
-    }
-
-    function exportCSV(headers, data) {
-      const csv = [headers.join(','), ...data.map(row => row.join(','))].join('\n');
-      downloadFile('gsc_data.csv', 'text/csv', csv);
-    }
-
-    function exportXLSX(headers, data) {
-      const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
-      XLSX.utils.book_append_sheet(wb, ws, 'GSC Data');
-      XLSX.writeFile(wb, 'gsc_data.xlsx');
-    }
-
-    function downloadFile(filename, type, content) {
-      const blob = new Blob([content], { type });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    // Existing scripts: showSection, toggleMenu, toggleFaq
-    // ...
-
-    // PWA Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
-    }
-
-    // Set default section
-    showSection('home');
-  </script>
+  <!-- Application Scripts -->
+  <script src="js/config.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/seo.js" defer></script>
 </body>
 </html>
