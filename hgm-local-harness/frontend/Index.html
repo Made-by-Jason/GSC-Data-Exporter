@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HGM Agentic Terminal // Nexus Harness</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        surface: {
+                            900: '#050505',
+                            800: '#0a0a0a',
+                            700: '#141414',
+                            600: '#1f1f1f'
+                        },
+                        neon: {
+                            cyan: '#00f0ff'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 12px rgba(0, 240, 255, 0.15)',
+                        'neon-strong': '0 0 20px rgba(0, 240, 255, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #050505; }
+        code, pre, .font-mono { font-family: 'Fira Code', monospace; }
+
+        /* Refined, minimal scrollbars */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1f1f1f; border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: #333; }
+
+        /* Luxury Glassmorphism Utility */
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="text-gray-200 h-screen w-screen overflow-hidden flex flex-col antialiased selection:bg-neon-cyan/20 selection:text-neon-cyan">
+
+    <!-- Top Navigation Bar -->
+    <header class="h-14 border-b border-white/5 bg-surface-900/80 backdrop-blur flex items-center justify-between px-6 shrink-0 z-10">
+        <div class="flex items-center space-x-2 font-mono text-[11px] tracking-[0.2em] text-gray-500 uppercase">
+            <span>HGM</span>
+            <span class="text-white/20">/</span>
+            <span class="text-neon-cyan glow-text">Nexus</span>
+        </div>
+        <div class="flex items-center space-x-3 text-[11px] font-mono tracking-wide text-gray-500">
+            <span id="status-indicator" class="w-1.5 h-1.5 rounded-full bg-neon-cyan shadow-neon"></span>
+            <span id="harness-status">SYSTEM READY</span>
+        </div>
+    </header>
+
+    <!-- Main Workspace Layout -->
+    <div class="flex-1 flex overflow-hidden">
+
+        <!-- Left Sidebar: File Explorer -->
+        <aside class="w-64 border-r border-white/5 bg-surface-800 flex flex-col shrink-0">
+            <div class="p-5 flex items-center space-x-2 text-[10px] font-mono text-gray-500 uppercase tracking-widest border-b border-white/5">
+                <i class="fa-solid fa-folder-tree opacity-50"></i>
+                <span>Workspace</span>
+            </div>
+            <div class="flex-1 overflow-y-auto p-3 space-y-1 text-xs font-mono">
+                <div class="text-gray-400 px-3 py-2 flex items-center"><i class="fa-solid fa-chevron-down mr-3 text-[9px] opacity-50"></i> root</div>
+                <div class="pl-6 space-y-1 border-l border-white/5 ml-4">
+                    <div class="hover:bg-white/5 hover:text-white px-3 py-1.5 rounded-md cursor-pointer text-gray-400 transition-colors flex items-center file-item" data-file="workspace/AGENTS.md">
+                        <i class="fa-regular fa-file-lines mr-3 opacity-50"></i> AGENTS.md
+                    </div>
+                    <div class="hover:bg-white/5 hover:text-white px-3 py-1.5 rounded-md cursor-pointer text-gray-400 transition-colors flex items-center file-item" data-file="workspace/state.json">
+                        <i class="fa-solid fa-code mr-3 opacity-50"></i> state.json
+                    </div>
+                </div>
+            </div>
+            <div class="p-5 border-t border-white/5 text-[10px] text-gray-600 font-mono flex items-center justify-between">
+                <span>Substrate</span>
+                <span class="text-gray-400">Node.js</span>
+            </div>
+        </aside>
+
+        <!-- Center Workspace -->
+        <main class="flex-1 flex flex-col bg-surface-900 relative overflow-hidden shadow-inner">
+
+            <!-- Chat Container -->
+            <div id="chat-container" class="flex-1 overflow-y-auto p-8 space-y-8">
+                <!-- Welcome Banner -->
+                <div class="max-w-3xl mx-auto border border-white/5 bg-surface-800/50 rounded-xl p-8 backdrop-blur-sm">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <i class="fa-solid fa-microchip text-xl text-neon-cyan opacity-80 shadow-neon"></i>
+                        <div>
+                            <h1 class="text-lg font-medium text-gray-100 tracking-wide">Autonomous Engine Online</h1>
+                            <p class="text-[11px] text-gray-500 font-mono mt-1">Local ReAct Runtime connected to localhost:3000</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed mb-6">
+                        Initialize a high-level strategic goal. The engine will synthesize intent, orchestrate local toolsets, and execute operations within the verified workspace boundary.
+                    </p>
+                    <div class="border border-white/5 bg-surface-900 rounded-lg p-3 text-xs font-mono text-gray-400 hover:text-neon-cyan hover:border-neon-cyan/30 transition-all cursor-pointer sample-prompt">
+                        <span class="opacity-30 mr-2">></span> Read workspace/AGENTS.md if it exists, otherwise write status active to workspace/state.json.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Command Bar -->
+            <div class="p-6 shrink-0 bg-gradient-to-t from-surface-900 via-surface-900/90 to-transparent">
+                <form id="prompt-form" class="max-w-3xl mx-auto relative">
+                    <div class="glass-panel rounded-xl p-1.5 flex items-end border border-white/10 focus-within:border-neon-cyan/40 focus-within:shadow-neon transition-all duration-300">
+                        <textarea id="user-input" rows="1" placeholder="Initialize command sequence..." class="w-full bg-transparent text-gray-100 placeholder-gray-600 font-light text-sm focus:outline-none resize-none px-4 py-3 min-h-[44px] max-h-32"></textarea>
+                        <div class="p-1">
+                            <button type="submit" id="submit-btn" class="h-9 px-5 bg-white/5 hover:bg-neon-cyan/10 border border-white/5 hover:border-neon-cyan/40 text-gray-300 hover:text-neon-cyan font-medium rounded-lg text-[13px] transition-all duration-300 flex items-center justify-center space-x-2">
+                                <span>Execute</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between mt-3 px-2 text-[10px] font-mono text-gray-600 uppercase tracking-widest">
+                        <span>LLM Subsystem: <span class="text-gray-400" id="current-model">Llama3</span></span>
+                        <span>Mode: <span class="text-neon-cyan/70">Strict Sandboxed</span></span>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Right Pane: Active File Inspector -->
+        <div class="w-80 border-l border-white/5 bg-surface-800 flex flex-col shrink-0 hidden lg:flex">
+            <div class="p-5 border-b border-white/5 flex items-center justify-between text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+                <span>Inspector</span>
+                <span id="active-filename" class="text-neon-cyan/70 lowercase">None</span>
+            </div>
+            <div class="flex-1 p-5 overflow-y-auto font-mono text-[11px] text-gray-400 leading-relaxed" id="file-viewer-content">
+                <p class="opacity-50">// Select a file to view context</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- UI Logic & API Integration -->
+    <script>
+        // File Viewer Binding
+        const mockVirtualFiles = {
+            "workspace/AGENTS.md": "# Agent Memory & Directives\n\n- Prioritize verified tool actions over speculation.\n- Enforce strict error handling patterns.",
+            "workspace/state.json": "{\n  \"status\": \"active\",\n  \"last_updated\": \"2026-09-13T19:30:52\"\n}"
+        };
+
+        document.querySelectorAll('.file-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const filename = item.getAttribute('data-file');
+                document.getElementById('active-filename').textContent = filename.split('/').pop();
+                document.getElementById('file-viewer-content').innerHTML = `<pre class="whitespace-pre-wrap text-gray-300">${escapeHtml(mockVirtualFiles[filename] || "// File empty or not found")}</pre>`;
+            });
+        });
+
+        // Sample Prompt Auto-fill
+        document.querySelectorAll('.sample-prompt').forEach(el => {
+            el.addEventListener('click', () => {
+                document.getElementById('user-input').value = el.textContent.replace('>', '').trim();
+                document.getElementById('user-input').focus();
+            });
+        });
+
+        // Textarea auto-resize
+        const tx = document.getElementById('user-input');
+        tx.addEventListener("input", function() {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+        });
+
+        // Chat Form Interaction
+        const form = document.getElementById('prompt-form');
+        const input = document.getElementById('user-input');
+        const chatContainer = document.getElementById('chat-container');
+        const harnessStatus = document.getElementById('harness-status');
+        const statusIndicator = document.getElementById('status-indicator');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = input.value.trim();
+            if(!text) return;
+
+            appendMessage('user', text);
+            input.value = '';
+            input.style.height = "auto";
+
+            await runAgentHarness(text);
+        });
+
+        function appendMessage(role, content) {
+            const isUser = role === 'user';
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `max-w-3xl mx-auto flex ${isUser ? 'justify-end' : 'justify-start'} w-full`;
+
+            let innerContent = '';
+            if(isUser) {
+                innerContent = `<div class="bg-surface-700/50 border border-white/5 text-gray-200 rounded-lg px-5 py-3 text-[13px] font-light max-w-xl">${escapeHtml(content)}</div>`;
+            } else {
+                innerContent = `
+                <div class="border-l border-neon-cyan/30 pl-6 py-1 w-full max-w-2xl">
+                    <div class="flex items-center space-x-2 mb-3 text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+                        <i class="fa-solid fa-bolt text-neon-cyan opacity-80"></i>
+                        <span>System Output</span>
+                    </div>
+                    <div class="text-[13px] font-light text-gray-300 leading-relaxed whitespace-pre-wrap">${escapeHtml(content)}</div>
+                </div>`;
+            }
+            msgDiv.innerHTML = innerContent;
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function runAgentHarness(goal) {
+            harnessStatus.textContent = "EXECUTING";
+            harnessStatus.classList.add("text-neon-cyan");
+            statusIndicator.classList.add("animate-ping");
+
+            // Add placeholder
+            const placeholderId = 'harness-run-' + Date.now();
+            const msgDiv = document.createElement('div');
+            msgDiv.id = placeholderId;
+            msgDiv.className = `max-w-3xl mx-auto flex justify-start w-full`;
+            msgDiv.innerHTML = `
+                <div class="border-l border-neon-cyan/30 pl-6 py-1 w-full max-w-2xl">
+                    <div class="flex items-center space-x-3 text-[10px] font-mono text-neon-cyan uppercase tracking-widest">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i>
+                        <span>Processing execution loop...</span>
+                    </div>
+                </div>`;
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/execute', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ goal: goal, model: 'llama3' })
+                });
+
+                const data = await response.json();
+
+                document.getElementById(placeholderId).remove();
+
+                if (data.status === 'success') {
+                    appendMessage('assistant', data.output);
+                } else {
+                    appendMessage('assistant', `Execution Fault: ${data.message}`);
+                }
+            } catch (error) {
+                document.getElementById(placeholderId).remove();
+                appendMessage('assistant', `Connection Failure: Ensure backend listener is active. (${error.message})`);
+            }
+
+            harnessStatus.textContent = "SYSTEM READY";
+            harnessStatus.classList.remove("text-neon-cyan");
+            statusIndicator.classList.remove("animate-ping");
+        }
+
+        function escapeHtml(text) {
+            return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+    </script>
+</body>
+</html>
