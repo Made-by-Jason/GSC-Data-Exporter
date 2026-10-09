@@ -143,8 +143,12 @@ function showSection(sectionId) {
  */
 function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
+    const toggleBtn = document.getElementById('menu-toggle');
     if (menu) {
-        menu.classList.toggle('hidden');
+        const isHidden = menu.classList.toggle('hidden');
+        if (toggleBtn) {
+            toggleBtn.setAttribute('aria-expanded', String(!isHidden));
+        }
     }
 }
 
